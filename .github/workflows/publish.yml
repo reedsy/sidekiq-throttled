@@ -1,0 +1,30 @@
+name: Publish
+
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 3
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby 2.7
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+    - name: Setting up access to GitHub Package Registry
+      run: |
+        mkdir -p ~/.gem
+        touch ~/.gem/credentials
+        chmod 600 ~/.gem/credentials
+        echo ":github: Bearer ${{ secrets.GITHUB_TOKEN }}" >> ~/.gem/credentials
+    - name: Bundle install
+      run: |
+        gem install bundler:2.1.4 --no-document
+        bundle install --jobs 4 --retry 3
+    - name: Publish package to GitHub Packages
+      run: |
+        bundle exec rake release_github
