@@ -69,9 +69,9 @@ RSpec.describe Sidekiq::Throttled::Web, :sidekiq => :enabled do
       end
 
       it "allows deleting the queue" do
-        expect(::Sidekiq::Queue.new("xxx").size).to be >= 1
+        expect(Sidekiq::Queue.new("xxx").size).to be >= 1
         post "/enhanced-queues/xxx", :action => "delete", :authenticity_token => csrf_token
-        expect(::Sidekiq::Queue.new("xxx").size).to eq 0
+        expect(Sidekiq::Queue.new("xxx").size).to eq 0
       end
     end
   end

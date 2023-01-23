@@ -151,7 +151,7 @@ RSpec.describe Sidekiq::Throttled::Strategy::Concurrency do
           expect(strategy.throttled?(jid, initial_key_input)).to be false
         end
 
-        it "allows to run exactly one more job afterwards" do
+        it "allows to run exactly one more job afterwards" do # rubocop:disable RSpec/NoExpectationExample
           strategy.finalize!(known_jid, key_input)
           strategy.throttled?(known_jid, key_input)
         end

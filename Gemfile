@@ -5,7 +5,7 @@ source "https://rubygems.org"
 gem "appraisal"
 gem "rake"
 gem "rspec"
-gem "sidekiq"
+gem "sidekiq", "< 7"
 
 group :development do
   gem "byebug"
