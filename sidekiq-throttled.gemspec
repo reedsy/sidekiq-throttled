@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Concurrency and threshold throttling for Sidekiq."
   spec.description   = "Concurrency and threshold throttling for Sidekiq."
-  spec.homepage      = "https://github.com/ixti/sidekiq-throttled"
+  spec.homepage      = "https://github.com/reedsy/sidekiq-throttled"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

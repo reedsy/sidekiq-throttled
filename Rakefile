@@ -25,3 +25,11 @@ default_suite = ENV["CI"] ? :spec : %i[spec rubocop]
 named_suites  = { "rubocop" => :rubocop, "rspec" => :spec }
 
 task :default => named_suites.fetch(ENV.fetch("SUITE", nil), default_suite)
+
+desc "Build and push package to GitHub Packages"
+task :release_github do
+  Rake::Task["build"].invoke
+  %x(gem push --key github \
+   --host https://rubygems.pkg.github.com/reedsy \
+   pkg/#{Bundler::GemHelper.gemspec.name}-#{Bundler::GemHelper.gemspec.version}.gem)
+end
